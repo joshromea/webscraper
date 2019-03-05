@@ -20,7 +20,7 @@ app.use(logger('dev'))
     .set('view engine', 'handlebars')
 
 // Connecting to Mongo Database //
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines"
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/webscraperHeadlines"
 
 mongoose.connect(MONGODB_URI)
 
