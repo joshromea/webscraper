@@ -7,7 +7,8 @@ const cheerio = require('cheerio')
 const hb = require('express-handlebars')
 
 const PORT = 3000
-const routes = require('./routes')
+const scraperRoute = require('./routes/scraperRoute')
+const apiRoute = require('./routes/apiRoutes')
 
 app = express()
 
@@ -15,7 +16,8 @@ app.use(logger('dev'))
     .use(express.urlencoded({ extended: true }))
     .use(express.json())
     .use(express.static('public'))
-    .use(routes)
+    .use(scraperRoute)
+    .use(apiRoute)
     .engine('handlebars', hb({ defaultLayout: 'main' }))
     .set('view engine', 'handlebars')
 
@@ -28,3 +30,5 @@ mongoose.connect(MONGODB_URI)
 app.listen(PORT, () => {
     console.log(`Listening on: http://localhost:${PORT}`)
 });
+
+module.exports = app
