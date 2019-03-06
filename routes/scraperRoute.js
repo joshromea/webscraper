@@ -7,11 +7,14 @@ module.exports = (app) => {
         axios.get('https://www.mandatory.com/wrestlezone/news')
             .then((res) => {
                 const $ = cheerio.load(res.data)
+
+                // Need help selecting the right element //
                 $('article').each((i, element) => {
                     let result = {}
-                    result.title = $(this).children('a').text()
+                    result.title = $(this).children('a').text('title')
                     result.link = $(this).children('a').attr('href')
-                    result.excerpt = $(this).children('p').text()
+                    result.image = $(this).children('a').children('div').children('img').attr('src')
+                    result.excerpt = $(this).children('div').children('div').children('div').children('div').children('div').children('p').text()
                     console.log(result)
                     db.Article.create(result)
                         .then((dbArticle) => {
