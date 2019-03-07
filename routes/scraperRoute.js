@@ -11,10 +11,10 @@ module.exports = (app) => {
                 // Need help selecting the right element //
                 $('article').each((i, element) => {
                     let result = {}
-                    result.title = $(this).children('a').text('title')
-                    result.link = $(this).children('a').attr('href')
-                    result.image = $(this).children('a').children('div').children('img').attr('src')
-                    result.excerpt = $(this).children('div').children('div').children('div').children('div').children('div').children('p').text()
+                    result.title = $(element).find('a').find('title').text()
+                    result.link = $(element).children('a').attr('href')
+                    result.image = $(element).find('a').find('div').children('img').attr('src')
+                    result.excerpt = $(element).find('div').find('p').text()
                     console.log(result)
                     db.Article.create(result)
                         .then((dbArticle) => {

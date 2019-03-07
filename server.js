@@ -2,29 +2,27 @@
 const express = require('express')
 const logger = require('morgan')
 const mongoose = require('mongoose')
-const axios = require('axios')
-const cheerio = require('cheerio')
 const hb = require('express-handlebars')
 
 const PORT = 3000
 const scraperRoute = require('./routes/scraperRoute')
-const apiRoute = require('./routes/apiRoutes')
+const apiRoutes = require('./routes/apiRoutes')
 
 app = express()
 
 app.use(logger('dev'))
-    .use(express.urlencoded({ extended: true }))
-    .use(express.json())
-    .use(express.static('public'))
-    .use(scraperRoute)
-    .use(apiRoute)
-    .engine('handlebars', hb({ defaultLayout: 'main' }))
-    .set('view engine', 'handlebars')
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+app.use(express.static('public'))
+app.use(scraperRoute)
+app.use(apiRoutes)
+app.engine('handlebars', hb({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
 
 // Connecting to Mongo Database //
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/webscraperHeadlines"
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 
 // Listner //
 app.listen(PORT, () => {
