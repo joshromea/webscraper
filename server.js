@@ -1,32 +1,33 @@
-// Dependencies //
 const express = require('express')
-const logger = require('morgan')
 const mongoose = require('mongoose')
-const hb = require('express-handlebars')
 
-const PORT = 3000
-const scraperRoute = require('./routes/scraperRoute')
-const apiRoutes = require('./routes/apiRoutes')
+const logger = require('morgan')
 
-app = express()
+const app = express()
+
+const db = require('./models')
 
 app.use(logger('dev'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+
 app.use(express.static('public'))
-app.use(scraperRoute)
-app.use(apiRoutes)
+
+const PORT = 3000
+
+const hb = require('express-handlebars')
 app.engine('handlebars', hb({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-// Connecting to Mongo Database //
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/webscraperHeadlines"
+const apiRoutes = require('./routes/apiRoutes')
+const scraperRoute = require('./routes/scraperRoute')
 
+app.use(apiRoutes)
+app.use(scraperRoute)
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoHeadlines'
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 
-// Listner //
 app.listen(PORT, () => {
-    console.log(`Listening on: http://localhost:${PORT}`)
-});
-
-module.exports = app
+    console.log(`App is running on http://localhost:${PORT}`)
+})
