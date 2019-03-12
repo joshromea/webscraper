@@ -1,5 +1,5 @@
 
-$(document).on('click', '.savebutton', (event) => {
+$('.savebutton').on('click', (event) => {
     let id = $(this).attr('data-articleId')
     console.log(id)
     $.ajax({
