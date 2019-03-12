@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark" id='header'>
+    <a class="navbar-brand" id='name' href="/scrape">Wrestlescraper</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item" id='home-tag'>
+                <a class="nav-link text-white" href="/">Home</a>
+            </li>
+            <li class="nav-item" id='saved-articles-tag'>
+                <a class="nav-link text-white" href="/saved">Saved Articles</a>
+            </li>
+            <li class="nav-item" id='scrape-btn'>
+                <a class="btn btn-warning scrape-new scrapebutton">SCRAPE NEW ARTICLES!</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class='jumbotron text-center'>
+    <div class='overlay'>
+    </div>
+    <div class='background-image'>
+    </div>
+    <div class='caption'>
+        <h1>Wrestlescraper</h1>
+    </div>
+</div>
+
+<div class='container-fluid"'>
+    <div class='article-section text-center'>
+        <h2>Headlines from Wrestlezone.com</h2>
+        <div class='row'>
+            <div class='col-md-auto justify-content-center'>
+                {{#each article}}
+                <div class="card" style="width: 50%">
+                    <img src="{{image}}" class="card-img-top">
+                    <div class="card-body article cards">
+                        <h5 class="card-title">{{title}}</h5>
+                        <p class="card-text">{{excerpt}}</p>
+                        <a href="{{link}}" target='_blank' class="btn btn-primary">Read this Article</a>
+                        <a data-articleId='{{_id}}' class="btn btn-success savebutton">Save this Article</a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

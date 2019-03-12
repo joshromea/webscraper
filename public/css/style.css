@@ -1,0 +1,26 @@
+html{
+    position: relative;
+    min-height: 100%;
+}
+
+body{
+    margin-bottom: 80px;
+    background-color: dodgerblue;
+}
+
+#header{
+    background-color: darkblue;
+    margin-bottom: 0;
+}
+
+.jumbotron .overlay{
+    position: absolute;
+    opacity: 0.7;
+}
+
+.jumbotron .background-image{
+    background-image: url('/images/background.jpg');
+    height: 100%;
+    background-size: cover;
+}
+

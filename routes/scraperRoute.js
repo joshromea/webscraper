@@ -9,7 +9,6 @@ router.get('/scrape', (req, res) => {
     axios.get('https://www.mandatory.com/wrestlezone/news')
         .then((res) => {
             const $ = cheerio.load(res.data)
-
             // Need help selecting the right element //
             $('article').each((i, element) => {
                 let result = {}
@@ -17,7 +16,6 @@ router.get('/scrape', (req, res) => {
                 result.link = $(element).find('a').attr('href')
                 result.excerpt = $(element).children('div').find('p').text()
                 result.image = $(element).find('a').children('div').find('img').attr('src')
-                console.log(result)
                 db.Article.create(result)
                     .then((dbArticle) => {
                         console.log(dbArticle)
@@ -27,7 +25,7 @@ router.get('/scrape', (req, res) => {
                     })
             })
         })
-    res.send('Scrape Complete')
+    res.redirect('/')
 })
 
 module.exports = router
